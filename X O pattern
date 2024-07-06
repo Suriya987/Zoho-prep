@@ -1,0 +1,59 @@
+Input:
+N= 3, M=3
+Output:
+X X X
+X 0 X
+X X X
+
+Input:
+N=4 M=5
+Output:
+X X X X
+X 0 0 X
+X 0 0 X
+X 0 0 X
+X X X X
+
+Input:
+N=6 M=7
+X X X X X X
+X 0 0 0 0 X
+X 0 X X 0 X
+X 0 X X 0 X
+X 0 X X 0 X
+X 0 0 0 0 X
+X X X X X X
+
+Time complexity : O(N*M)
+Space complexity : O(1)
+ 
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    
+    // for row i==1 , i==m-2   printing 0 
+    // for col j==1, j==n-2
+    
+    int M=7,N=6;
+    // for row
+    for(int i=0;i<M;i++)
+    {
+        //for col
+        for(int j=0;j<N;j++)
+        {
+            
+            //for row
+            if((i==1 || i==M-2) && (j>0 && j<N-1))
+              cout<<"0 ";
+            // for col
+           else if((j==1 || j==N-2)  && (i>0 && i<N-1))
+              cout<<"0 ";
+            else
+            cout<<"X ";
+     
+        }
+        cout<<"\n";
+    }   
+}
