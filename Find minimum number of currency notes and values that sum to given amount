@@ -1,0 +1,55 @@
+Given an amount, find the minimum number of notes of different denominations that sum up to the given amount. Starting from the highest denomination note, try to accommodate as many notes as possible for a given amount.
+We may assume that we have infinite supply of notes of values {2000, 500, 200, 100, 50, 20, 10, 5, 1} 
+Examples: 
+ 
+
+Input : 800
+Output : Currency  Count 
+         500 : 1
+         200 : 1
+         100 : 1
+
+Input : 2456
+Output : Currency  Count
+         2000 : 1
+         200 : 2
+         50 : 1
+         5 : 1
+         1 : 1
+
+Time Complexity: O(1), as the algorithm has a fixed number of iterations (9) that does not depend on the size of the input.
+
+Auxiliary Space: O(1), as the algorithm only uses a fixed amount of space to store the notes and note counters, which does not depend on the size of the input.
+
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+
+    int amount=2456;
+    vector<int> currency {2000,500,200,100,50,20,10,5,1};
+    vector<int> currencyCount(currency.size(),0);
+ 
+        for(int i=0;i<currency.size();i++)
+        {
+            if(amount<=0)  break;
+            if(currency[i]<=amount)
+            {
+              
+                int temp=amount/currency[i];
+                currencyCount[i]=temp;
+              
+                amount=amount-(temp*currency[i]);
+              
+                currencyCount[i]=temp;
+            }
+          
+        }
+        
+        for(int i=0;i<9;i++)
+        {
+            cout<<currency[i]<<" "<<currencyCount[i]<<"\n";
+        }
+
+    return 0;
+}
