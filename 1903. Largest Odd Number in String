@@ -41,6 +41,12 @@ public:
             }  
         }
 
+     /*
+      //Time  Optimised 
+        if(endIndex==-1) return "";
+         return res.substr(0,endIndex+1);    --> syntax : substr(startIndex,endingIndex);
+    */
+
         for(int i=0;i<=endIndex;i++)
           res+=num[i];
 
