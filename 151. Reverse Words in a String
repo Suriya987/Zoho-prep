@@ -1,0 +1,68 @@
+Given an input string s, reverse the order of the words.
+
+A word is defined as a sequence of non-space characters. The words in s will be separated by at least one space.
+
+Return a string of the words in reverse order concatenated by a single space.
+
+Note that s may contain leading or trailing spaces or multiple spaces between two words. The returned string should only have a single space separating the words. 
+Do not include any extra spaces.
+
+ 
+
+Example 1:
+
+Input: s = "the sky is blue"
+Output: "blue is sky the"
+Example 2:
+
+Input: s = "  hello world  "
+Output: "world hello"
+Explanation: Your reversed string should not contain leading or trailing spaces.
+Example 3:
+
+Input: s = "a good   example"
+Output: "example good a"
+Explanation: You need to reduce multiple spaces between two words to a single space in the reversed string.
+
+Time complexity : O(N)
+space complexity : O(1)
+
+class Solution {
+public:
+    string reverseWords(string s) {
+        int len=s.size();
+        string res="";
+          int start=0,end=INT_MAX,char1=0;
+        for(int i=len-1;i>=0;i--)
+        {
+             if(s[i]!=' ' && end==INT_MAX)
+             {
+               end=i;
+               char1=1;
+             }
+            //  else if(s[i]!=' ')   --> this condition skips the first word in a string
+            //   char1=1;
+              if(s[i]==' ' || i==0 )
+             { 
+                 
+                if(char1==1 )
+                {
+                if(i==0 && s[i]!=' ')
+                 start=i;
+                else
+                 start=i+1;
+                 // just for adding space between words
+                 if(res.size()!=0) res+=' '; 
+
+                for(int i=start;i<=end;i++)
+                {
+                    res+=s[i];
+                }
+                char1=0;
+                end=INT_MAX;
+                }
+             }   
+        }
+        return res;
+    }
+};
