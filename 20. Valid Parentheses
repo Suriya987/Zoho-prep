@@ -1,0 +1,99 @@
+Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+
+An input string is valid if:
+
+Open brackets must be closed by the same type of brackets.
+Open brackets must be closed in the correct order.
+Every close bracket has a corresponding open bracket of the same type.
+ 
+
+Example 1:
+
+Input: s = "()"
+Output: true
+Example 2:
+
+Input: s = "()[]{}"
+Output: true
+Example 3:
+
+Input: s = "(]"
+Output: false
+
+
+Time complexity : O(N)
+Space complexity : O(N)
+
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char> st;
+        if(s.length()%2!=0) return false;
+        for (int i = 0; i < s.length(); i++) {
+            if (s[i] == '(' || s[i] == '{' || s[i] == '[') {
+                st.push(s[i]);
+            } else {
+                if (st.size()==0) return false;
+                char top = st.top();
+                if ((s[i] == ')' && top == '(') ||
+                    (s[i] == '}' && top == '{') ||
+                    (s[i] == ']' && top == '[')) {
+                    st.pop();
+                }
+                else return false; 
+            }
+        }
+        if(st.size()==0) return true;
+        else return false;
+    }
+};
+
+/*class Solution {
+public:
+    bool isValid(string s) {
+         int curveCount=0,sqCount=0,curlyCount=0;
+
+      int len=s.size();
+      if(len==1)  return false;
+      for(int i=0;i<len;i++)
+      {
+         if(i==0)
+           {
+             if(s[i]==')' || s[i]=='}' || s[i]==']')
+               return false;
+           }
+        if(s[i]=='(')
+          curveCount++;
+         else if(s[i]==')')
+         {
+            if(s[i-1]=='[' || s[i-1]=='{')
+              return false;
+           curveCount--;
+           if(curveCount<0)  return false;
+
+         }
+         else if(s[i]=='[')
+            sqCount++;
+          else if(s[i]==']')
+          {
+            if(s[i-1]=='(' || s[i-1]=='{')
+              return false;
+            sqCount--;
+            if(sqCount<0) return false;
+          }
+          else if(s[i]=='{')
+            curlyCount++;
+          else
+          {
+             if(s[i-1]=='[' || s[i-1]=='(')
+              return false;
+             curlyCount--;
+             if(curlyCount<0)  return false;
+          }
+      }
+      if((curveCount==0 && sqCount==0) && curlyCount==0)
+        return true;
+
+        return false;
+    }
+}; */
