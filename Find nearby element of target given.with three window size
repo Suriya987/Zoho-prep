@@ -1,0 +1,84 @@
+Given an array of integers 'nums' and an integer 'target', find the threee integers in nums such that the sum is closest to target . Return the sum of those 
+three integers.Assume that there is only one output.
+
+input 
+nums={-1,2,1,-4} target=1
+
+output : 2
+
+Explanation : the sum that is closest to the target is 2 ( -1+2+1 )
+
+Time complexity : o(N^2)
+space complexity : O(1)
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    vector<int> temp = { 0,0,3,0,0,0 };
+    
+    int n=temp.size();
+    
+    int target=1,result=INT_MIN,currSum=0;
+    
+    for(int i=0;i<=n-3;i++)
+    {
+        currSum=0;
+        for(int j=i;j<(i+3-1);j++)
+        {
+           currSum+=temp[j]; 
+        }
+        if(i==0)
+           result=currSum;
+        else
+          {
+              int n1=abs(result-target);
+              int n2=abs(currSum-target);
+              if(n1>n2)
+                  result=currSum;
+          }
+    }
+     cout<<result;
+}
+
+Optimised approach: using two pointers
+
+Time complexity : O(N)
+space complexity : O(1)
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    vector<int> nums = { -1,2,1,-4};
+    
+    int n=nums.size();
+    
+    int target=1,result=INT_MIN,currSum=0;
+     
+     int left=0,right=0;
+     while(right<n)
+     {
+         currSum+=nums[right];
+         //checking my window size whether it reaches possible len 
+         
+         if((right-left+1)==3)
+         {
+             if(left==0)
+              result=currSum;
+              else
+               {
+              int n1=abs(result-target);
+              int n2=abs(currSum-target);
+              if(n1>n2)
+                  result=currSum;
+              } 
+              currSum=currSum-nums[left];
+              left++;
+         }
+         right++;
+     }
+     cout<<result;
+}
