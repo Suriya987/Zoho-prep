@@ -28,7 +28,7 @@ Explanation: We can pick from trees [2,3,2,2].
 If we had started at the first tree, we would only pick from trees [1,2].
 
 Time complexity : O(N)
-space complexity : O(9)
+space complexity : O(3) -> will delete the element if it is greater than 2 so
 
 class Solution {
 public:
