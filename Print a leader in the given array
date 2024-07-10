@@ -1,0 +1,39 @@
+write a program to print all the LEADERS in the given array.An element is leader if it is greater than all the elements to its right side and the rightmost element is always
+a greater.
+
+solve it in O(N)
+
+input : Arr[]={7,8,3,4,6,2}
+output : 8 6 2
+
+input : Arr[]={5,5,3,2,1}
+output : 5 3 2 1
+
+Time complexity : O(N)
+space complexity : O(1)
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    vector<int>arr={7,8,3,4,6,2};
+    
+    vector<int>res;
+    int len=arr.size();
+    int maxEle=INT_MIN;
+    
+    for(int i=len-1;i>=0;i--)
+    {
+        if(maxEle<arr[i])
+        {
+            maxEle=arr[i];
+            res.push_back(maxEle);
+        }
+    }
+    
+    for(int i=res.size()-1;i>=0;i--)
+    {
+        cout<<res[i]<<" ";
+    }
+}
