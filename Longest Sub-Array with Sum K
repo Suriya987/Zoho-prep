@@ -1,0 +1,58 @@
+Given an array arr containing n integers and an integer k. Your task is to find the length of the longest Sub-Array with the sum of the elements equal to the
+given value k.
+
+Examples:
+ 
+
+Input :
+arr[] = {10, 5, 2, 7, 1, 9}, k = 15
+Output : 4
+Explanation:
+The sub-array is {5, 2, 7, 1}.
+Input : 
+arr[] = {-1, 2, 3}, k = 6
+Output : 0
+Explanation: 
+There is no such sub-array with sum 6.
+Expected Time Complexity: O(n).
+Expected Auxiliary Space: O(n).
+
+Time Complexity: O(N) or O(N*logN) depending on which map data structure we are using, where N = size of the array.
+Reason: For example, if we are using an unordered_map data structure in C++ the time complexity will be O(N)(though in the worst case, 
+unordered_map takes O(N) to find an element and the time complexity becomes O(N2))
+but if we are using a map data structure, the time complexity will be O(N*logN). The least complexity will be O(N) as we are using a loop to traverse the array.
+
+Space Complexity: O(N) as we are using a map data structure.
+
+class Solution{
+    public:
+    int lenOfLongSubarr(int A[],  int N, int K) 
+    { 
+         // unordered_map<int,int> mp;
+          
+          map<int,int>mp;
+          int maxLen=0,sum=0;
+          
+          for(int i=0;i<N;i++)//dia.geeksforgeeks.org/img-practice/FabIconlong-desktop-1720176804.svg
+          {
+              sum+=A[i];
+              
+              if(sum==K)
+               maxLen=i+1;
+               
+               int reqVal=sum-K;
+              
+              if(mp.find(reqVal)!=mp.end())
+              {
+                  maxLen=max(maxLen,i-mp[reqVal]);
+              }
+              
+              //update the current sum if it is not in the map
+              if(mp.find(sum)==mp.end())
+               mp[sum]=i;
+          }
+          return maxLen;
+          
+    } 
+
+};
